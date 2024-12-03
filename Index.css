@@ -1,3 +1,6 @@
+* {
+    box-sizing: border-box;
+}
 body {
     font-family: Arial, sans-serif;
     text-align: center;
@@ -6,17 +9,20 @@ body {
 
 #torre_de_hanoi {
     display: grid;
-    grid-column: (a);
-    margin-top: 20px;
+    grid-template-columns: repeat(auto-fit, 400px);
+    justify-content: center;
+    margin-top: 50px;
+    margin-bottom: 107px;
+    gap: 71px;
 }
-#support {
-    position: relative;
+#container-torre-1, #container-torre-2, #container-torre-3 {
+    height: 291px;
 }
-#support > img {
-    position: absolute;
-    z-index: -1;
-    bottom: -71px;
-    left: -94px;
+#torre1, #torre2, #torre3 {
+    background-image: url(/Image/Torre_Hanoi.png);
+    background-repeat: no-repeat;
+    padding-bottom: 71px;
+    height: 100%;
 }
 ul {
     list-style: none;
@@ -28,7 +34,6 @@ ul {
     align-items: center;
     justify-content: flex-end;
 }
-
 li {
     height: 37px;
     text-align: center;
@@ -39,7 +44,15 @@ li {
     justify-content: center;
     align-items: center;
 }
-
-button {
-    margin: 5px;
+.buttons {
+    display: flex;
+    gap: 16px;
+    flex-direction: row;
+    margin-top: 3px;
+    padding: 10px 40px;
+    justify-content: center;
+}
+.buttons > button {
+    width: 154px;
+    height: 37px;
 }
