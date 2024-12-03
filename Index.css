@@ -1,0 +1,45 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f4f4f4;
+}
+
+#torre_de_hanoi {
+    display: grid;
+    grid-column: (a);
+    margin-top: 20px;
+}
+#support {
+    position: relative;
+}
+#support > img {
+    position: absolute;
+    z-index: -1;
+    bottom: -71px;
+    left: -94px;
+}
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+li {
+    height: 37px;
+    text-align: center;
+    line-height: 20px;
+    color: black;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button {
+    margin: 5px;
+}

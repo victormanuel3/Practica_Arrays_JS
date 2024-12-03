@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="Index.js" defer></script>
+    <link rel="stylesheet" href="Index.css">
+</head>
+<body>
+    <p>Hola</p>
+    <div id="div_llista_numeros"></div>
+    <!-- -------- -->
+    <h1>Torres de Hanoi</h1>
+    <input type="number" id="number" min="1" max="5"><button onclick="asignarNumber()">Agregar</button>
+    <div id="torre_de_hanoi">
+        <div id="container-torre-1">
+            <div id="support">
+                <ul id="torre1"></ul>
+                <img src="/Image/Torre_Hanoi.png">
+            </div>
+            <button onclick="moveDisk(1,2)">Mou pila 2</button>
+            <button onclick="moveDisk(1,3)">Mou pila 3</button>
+        </div>
+        <div id="container-torre-2">
+            <div id="support">
+                <ul id="torre2"></ul>   
+            </div>
+            <button onclick="moveDisk(2,1)">Mou pila 1</button>
+            <button onclick="moveDisk(2,3)">Mou pila 3</button>
+        </div>
+        <div id="container-torre-3">
+            <div id="support">
+                <ul id="torre3"></ul>
+            </div>
+            <button onclick="moveDisk(3,1)">Mou pila 1</button>
+            <button onclick="moveDisk(3,2)">Mou pila 2</button>
+        </div>
+    </div>
+</body>
+</html>
