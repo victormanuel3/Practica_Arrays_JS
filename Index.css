@@ -56,3 +56,8 @@ li {
     width: 154px;
     height: 37px;
 }
+.buscaminas {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

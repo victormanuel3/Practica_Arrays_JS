@@ -1,51 +1,3 @@
-// Programa en HTML un sistema de control de arrays
-// 1. Crea un array global de nom “llista_numeros” amb 5 valors numèrics aleatoris
-// entre 1 y 10.
-// Al iniciar la web mostra un div para cada valor del array:
-
-llista_numeros = Array(5);
-for (let i = 0; i < llista_numeros.length; i++) {
-      llista_numeros[i] = (Math.floor(Math.random() * 10));
-      console.log(llista_numeros[i]);
-}
-
-function mostraArray() {
-      let div = document.getElementById("div_llista_numeros");
-      llista_numeros.forEach(
-            function (numero) {
-                  div.innerHTML += "<div>" + numero + "</div>";
-            });
-}
-mostraArray();
-
-llista_bidimensional = new Array(
-      new Array(10),
-      new Array(10)
-);
-
-for (let i = 0; i < llista_bidimensional.length; i++) {
-      for (let k = 0; k < llista_bidimensional[i].length; k++) {
-            llista_bidimensional[i][k] = Math.floor(Math.random() * 10);
-      }
-}
-
-function mostraArrayBidimensional() {
-      let div = document.getElementById("div_llista_numeros");
-      for (let i = 0; i < llista_bidimensional.length; i++) {
-            div.innerHTML += "<div>"
-            for (let k = 0; k < llista_bidimensional[i].length; k++) {
-                  div.innerHTML += "<div class=\"item_array\">" + llista_bidimensional[i][k] + "</div>";
-            }
-            div.innerHTML += "</div>"
-      }
-}
-mostraArrayBidimensional();
-
-// document.getElementById("btn_primer_ultim").addEventListener("onclick", ()=>{
-//       // document.getElementById("resultats").innerHTML=
-//       // "<ul>";
-// });
-
 /*  TORRES DE HANOI -------------------------*/
 
 let div_torres = [
@@ -86,7 +38,6 @@ function moveDisk(from, to) {
       }
 }
 
-
 function updateTowers() {
       let baseWidth = 50; // Ancho base para el disco más pequeño
       let widthIncrement = 40; // Incremento por cada disco más grande
@@ -109,61 +60,136 @@ function updateTowers() {
 /* BUSCAMINAS --------------------------- */
 
 let tablero = new Array(8);
-/* */
 for (let i = 0; i < tablero.length; i++) {
-      tablero[i] = [];
-      for (let k = 0; k < tablero.length; k++) {
-            tablero[i][k] = 0;
-      }
+    tablero[i] = [];
+    for (let k = 0; k < tablero.length; k++) {
+        tablero[i][k] = 0;
+    }
 }
 
 function place_bomb() {
-      let bombs = 0;
+    let bombs = 0;
 
-      while(bombs < 10){
-            let row = Math.floor(Math.random() * 8);
-            let colunm = Math.floor(Math.random() * 8);
-            if (tablero[row][colunm] === 0){
-                  let bombsPerRow = 0; 
-                  for (let i = 0; i < tablero[row].length; i++) {
-                        if (tablero[row][i] == 'x') {
-                              bombsPerRow++;
-                        }
-                  }
-                  if(bombsPerRow < 3) {
-                        tablero[row][colunm] = 'x';
-                        bombs++;
-                  }
+    while (bombs < 10) {
+        let row = Math.floor(Math.random() * 8);
+        let col = Math.floor(Math.random() * 8);
+        if (tablero[row][col] === 0) {
+            let bombsPerRow = tablero[row].filter(cell => cell === 'x').length;
+            if (bombsPerRow < 3) {
+                tablero[row][col] = 'x';
+                bombs++;
             }
-      }
-
+        }
+    }
 }
 
 function count_adjacent_bombs() {
-      for (let i = 0; i < tablero.length; i++) {
-          for (let k = 0; k < tablero[i].length; k++) {
-              if (tablero[i][k] == 'x') {
-                  continue; // Saltar las celdas con bombas
-              }
-              let countBombs = 0;
-  
-              // Verificar las celdas adyacentes
-              if (k > 0 && tablero[i][k - 1] == 'x') countBombs++; // Izquierda
-              if (k < tablero[i].length - 1 && tablero[i][k + 1] == 'x') countBombs++; // Derecha
-              if (i > 0 && tablero[i - 1][k] == 'x') countBombs++; // Arriba
-              if (i < tablero.length - 1 && tablero[i + 1][k] == 'x') countBombs++; // Abajo
-              if (i > 0 && k > 0 && tablero[i - 1][k - 1] == 'x') countBombs++; // Arriba izquierda
-              if (i > 0 && k < tablero[i].length - 1 && tablero[i - 1][k + 1] == 'x') countBombs++; // Arriba derecha
-              if (i < tablero.length - 1 && k > 0 && tablero[i + 1][k - 1] == 'x') countBombs++; // Abajo izquierda
-              if (i < tablero.length - 1 && k < tablero[i].length - 1 && tablero[i + 1][k + 1] == 'x') countBombs++; // Abajo derecha
-  
-              tablero[i][k] = countBombs; // Asignar el conteo de bombas adyacentes
-          }
-      }
+    for (let i = 0; i < tablero.length; i++) {
+        for (let k = 0; k < tablero[i].length; k++) {
+            if (tablero[i][k] === 'x') continue;
+            let countBombs = 0;
+
+            // Verificar celdas adyacentes
+            for (let dx = -1; dx <= 1; dx++) {
+                for (let dy = -1; dy <= 1; dy++) {
+                    if (dx === 0 && dy === 0) continue; // Ignorar la celda actual
+                    let nx = i + dx, ny = k + dy;
+                    if (nx >= 0 && nx < 8 && ny >= 0 && ny < 8 && tablero[nx][ny] === 'x') {
+                        countBombs++;
+                    }
+                }
+            }
+            tablero[i][k] = countBombs;
+        }
+    }
 }
 
-console.log(tablero);
-console.log(place_bomb());
-console.log(count_adjacent_bombs());
+function renderBoard() {
+    const boardElement = document.getElementById("buscaminas");
+    boardElement.innerHTML = ""; // Limpiar el tablero
+
+    for (let i = 0; i < tablero.length; i++) {
+        let rowDiv = document.createElement("div");
+        rowDiv.style.display = "flex";
+
+        for (let k = 0; k < tablero[i].length; k++) {
+            let cell = document.createElement("button");
+            cell.style.width = "30px";
+            cell.style.height = "30px";
+            cell.style.margin = "2px";
+            cell.dataset.row = i;
+            cell.dataset.col = k;
+            cell.onclick = handleCellClick;
+            cell.innerText = ""; // Inicialmente vacío
+            rowDiv.appendChild(cell);
+        }
+
+        boardElement.appendChild(rowDiv);
+    }
+}
+
+function handleCellClick(event) {
+    const row = parseInt(event.target.dataset.row);
+    const col = parseInt(event.target.dataset.col);
+    const cellValue = tablero[row][col];
+
+    if (cellValue === 'x') {
+        alert("¡Boom! Has encontrado una mina. Juego terminado.");
+        revealBoard();
+    } else {
+        revealCell(row, col);
+        checkWin();
+    }
+}
+
+function revealCell(row, col) {
+    const cells = document.querySelectorAll("button");
+    const cell = Array.from(cells).find(c => c.dataset.row == row && c.dataset.col == col);
+
+    if (cell && cell.innerText === "") {
+        cell.innerText = tablero[row][col];
+        cell.disabled = true;
+        if (tablero[row][col] === 0) {
+            // Revelar celdas conexas
+            for (let dx = -1; dx <= 1; dx++) {
+                for (let dy = -1; dy <= 1; dy++) {
+                    if (dx === 0 && dy === 0) continue;
+                    let nx = row + dx, ny = col + dy;
+                    if (nx >= 0 && nx < 8 && ny >= 0 && ny < 8) {
+                        revealCell(nx, ny);
+                    }
+                }
+            }
+        }
+    }
+}
+
+function revealBoard() {
+    const cells = document.querySelectorAll("button");
+    cells.forEach(cell => {
+        const row = parseInt(cell.dataset.row);
+        const col = parseInt(cell.dataset.col);
+        cell.innerText = tablero[row][col];
+        cell.disabled = true;
+    });
+}
+
+function checkWin() {
+    const cells = document.querySelectorAll("button");
+    const hiddenCells = Array.from(cells).filter(cell => cell.innerText === "");
+    const nonMineCells = hiddenCells.filter(cell => tablero[cell.dataset.row][cell.dataset.col] !== 'x');
+
+    if (nonMineCells.length === 0) {
+        alert("¡Felicidades! Has ganado el juego.");
+        revealBoard();
+    }
+}
+
+// Inicializar el tablero
+place_bomb();
+count_adjacent_bombs();
+renderBoard();
+
+console.log(tablero); // Mostrar las minas en la consola
 
 /*----------------------------------------*/
