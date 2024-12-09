@@ -9,7 +9,10 @@
 </head>
 <body>
     <h1>Torres de Hanoi</h1>
-    <input type="number" id="number" min="1" max="5"><button onclick="asignarNumber()">Agregar</button>
+    <div class="container_input">
+        <input type="number" id="number" min="1" max="5">
+        <button onclick="asignarNumber()">Agregar</button>
+    </div>
     <div id="torre_de_hanoi">
         <div id="container-torre-1">
             <ul id="torre1"></ul>
@@ -34,6 +37,8 @@
         </div>
     </div>
     <h1>Buscaminas</h1>
-    <div id="buscaminas"></div>
+    <button onclick="startGame()">Start</button>
+    <p>Puntuación: <span id="score">0</span></p>
+    <div id="game"></div>
 </body>
 </html>
